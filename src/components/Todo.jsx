@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { addTodo } from '../app/store'
+import { addTodo, deleteTodo, cloneTodo } from '../app/store'
 
 function Todo() {
   const dispatch = useDispatch()
@@ -8,7 +8,7 @@ function Todo() {
 
   const [newTask, setNewTask] = useState("")
 
-  const addTask = () => {
+  const handleAddTask = () => {
     if (newTask.trim() === "") {
       return
     }
@@ -24,6 +24,14 @@ function Todo() {
     setNewTask("")
   }
 
+  const handleDelete = (taskId) => {
+    dispatch(deleteTodo(taskId))
+  }
+
+  const handleClone = (taskId) => {
+    dispatch(cloneTodo(taskId))
+  }
+
   const handleInputChange = (e) => {
     setNewTask(e.target.value)
   }
@@ -36,15 +44,15 @@ function Todo() {
         value={newTask}
         onChange={handleInputChange}
       />
-      <button onClick={addTask}>Add Task</button>
+      <button onClick={handleAddTask}>Add Task</button>
       <h2>My Todos:</h2>
       <ul className="todo-list">{
         tasks.map((task) => (
           <li key={task.id}>
             <span>{task.description}</span>
             <div class="button-container">
-              <button>Delete</button>
-              <button>Clone</button>
+              <button onClick={() => handleDelete(task.id)}>Delete</button>
+              <button onClick={() => handleClone(task.id)}>Clone</button>
             </div>
           </li>
         ))

@@ -17,11 +17,19 @@ function todoReducer(state = initialState, action) {
         value: [...state.value, action.payload],
       };
     case "todo/DELETE_TODO":
-      // add code here
-      break
+      // return entire state value except the one in payload
+      return {
+        ...state,
+        value: state.value.filter((todo) => todo.id !== action.payload),
+      };
     case "todo/CLONE_TODO":
-      // add code here
-      break
+      // add new item by cloing the one in payload
+      const clonedTodo = state.value.find((todo) => todo.id === action.payload);
+      const newTodo = { ...clonedTodo, id: Date.now() };
+      return {
+        ...state,
+        value: [...state.value, newTodo],
+      };
     default:
       return state
   }
@@ -37,5 +45,19 @@ export const addTodo = (newTodo) => {
     payload: newTodo
   }
 }
+
+export const deleteTodo = (todoId) => {
+  return {
+    type: "todo/DELETE_TODO",
+    payload: todoId,
+  };
+};
+
+export const cloneTodo = (todoId) => {
+  return {
+    type: "todo/CLONE_TODO",
+    payload: todoId,
+  };
+};
 
 export default store
