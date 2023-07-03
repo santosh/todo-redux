@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { addTodo } from '../app/store'
 
 function Todo() {
-  const [tasks, setTasks] = useState([
-    { id: 1, description: "Write email", completed: false },
-    { id: 2, description: "Deep work", completed: false },
-    { id: 3, description: "Meeting", completed: false },
-    { id: 4, description: "Write design doc", completed: false },
-  ])
+  const dispatch = useDispatch()
+  const tasks = useSelector(state => state.value)
 
   const [newTask, setNewTask] = useState("")
 
@@ -21,7 +19,8 @@ function Todo() {
       completed: false
     }
 
-    setTasks([...tasks, newTaskItem])
+    // setTasks([...tasks, newTaskItem])
+    dispatch(addTodo(newTaskItem))
     setNewTask("")
   }
 

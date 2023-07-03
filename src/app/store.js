@@ -17,9 +17,11 @@ function todoReducer(state = initialState, action) {
         value: [...state.value, action.payload],
       };
     case "todo/DELETE_TODO":
-    // add code here
+      // add code here
+      break
     case "todo/CLONE_TODO":
-    // add code here
+      // add code here
+      break
     default:
       return state
   }
