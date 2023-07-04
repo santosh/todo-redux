@@ -1,39 +1,6 @@
 import { createStore } from "redux"
+import { todoReducer } from "./reducer"
 
-const initialState = {
-  value: [
-    { id: 1, description: "Write email", completed: false },
-    { id: 2, description: "Deep work", completed: false },
-    { id: 3, description: "Meeting", completed: false },
-    { id: 4, description: "Write design doc", completed: false },
-  ]
-}
-
-function todoReducer(state = initialState, action) {
-  switch (action.type) {
-    case "todo/ADD_TODO":
-      return {
-        ...state,
-        value: [...state.value, action.payload],
-      };
-    case "todo/DELETE_TODO":
-      // return entire state value except the one in payload
-      return {
-        ...state,
-        value: state.value.filter((todo) => todo.id !== action.payload),
-      };
-    case "todo/CLONE_TODO":
-      // add new item by cloing the one in payload
-      const clonedTodo = state.value.find((todo) => todo.id === action.payload);
-      const newTodo = { ...clonedTodo, id: Date.now() };
-      return {
-        ...state,
-        value: [...state.value, newTodo],
-      };
-    default:
-      return state
-  }
-}
 
 const store = createStore(todoReducer)
 
@@ -41,23 +8,32 @@ const store = createStore(todoReducer)
 
 export const addTodo = (newTodo) => {
   return {
-    type: "todo/ADD_TODO",
+    type: "todo/TODO_ADDED",
     payload: newTodo
   }
 }
 
 export const deleteTodo = (todoId) => {
   return {
-    type: "todo/DELETE_TODO",
+    type: "todo/TODO_DELETED",
     payload: todoId,
   };
 };
 
 export const cloneTodo = (todoId) => {
   return {
-    type: "todo/CLONE_TODO",
+    type: "todo/TODO_CLONED",
     payload: todoId,
   };
 };
+
+// {type: 'todos/todoAdded', payload: todoText}
+// {type: 'todos/todoToggled', payload: todoId}
+// {type: 'todos/colorSelected', payload: {todoId, color}}
+// {type: 'todos/todoDeleted', payload: todoId}
+// {type: 'todos/allCompleted'}
+// {type: 'todos/completedCleared'}
+// {type: 'filters/statusFilterChanged', payload: filterValue}
+// {type: 'filters/colorFilterChanged', payload: {color, changeType}}
 
 export default store
