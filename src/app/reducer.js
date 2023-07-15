@@ -14,10 +14,13 @@ const initialState = {
 export function todoReducer(state = initialState, action) {
   switch (action.type) {
     case "todo/TODO_ADDED":
+      action.payload.id = nextTodoId(state.todos)
       return {
         ...state,
         todos: [...state.todos, action.payload],
       };
+    case "todo/TODO_TOGGLED":
+      return
     case "todo/TODO_DELETED":
       // return entire state value except the one in payload
       return {
@@ -35,4 +38,9 @@ export function todoReducer(state = initialState, action) {
     default:
       return state
   }
+}
+
+function nextTodoId(todos) {
+  const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId) - 1)
+  return maxId + 1
 }
