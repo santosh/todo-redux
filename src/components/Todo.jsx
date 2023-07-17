@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { addTodo, deleteTodo, cloneTodo } from '../app/store'
+import { addTodo, deleteTodo, cloneTodo } from '../features/store'
 
 function Todo() {
   const dispatch = useDispatch()

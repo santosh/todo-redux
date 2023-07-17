@@ -1,5 +1,5 @@
 import { createStore } from "redux"
-import { todoReducer } from "./reducer"
+import { todoReducer } from "./todoSlice"
 
 
 const store = createStore(todoReducer)
@@ -27,8 +27,14 @@ export const cloneTodo = (todoId) => {
   };
 };
 
+export const toggleTodo = (todoId) => {
+  return {
+    type: "todo/TODO_TOGGLED",
+    payload: todoId,
+  };
+};
+
 // {type: 'todos/todoAdded', payload: todoText}
-// {type: 'todos/todoToggled', payload: todoId}
 // {type: 'todos/colorSelected', payload: {todoId, color}}
 // {type: 'todos/todoDeleted', payload: todoId}
 // {type: 'todos/allCompleted'}
