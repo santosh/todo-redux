@@ -1,8 +1,7 @@
 import { createStore } from "redux"
-import { todoReducer } from "./todoSlice"
+import { rootReducer } from "./reducer";
 
-
-const store = createStore(todoReducer)
+const store = createStore(rootReducer)
 
 // ACTIONS
 

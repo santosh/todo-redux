@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Provider } from 'react-redux';
 import App from './App';
-import store from './features/store';
+import store from './store';
 import reportWebVitals from './reportWebVitals';
+
+console.log(store.getState())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

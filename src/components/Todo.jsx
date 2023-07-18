@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { addTodo, deleteTodo, cloneTodo } from '../features/store'
+import { addTodo, deleteTodo, cloneTodo } from '../store'
 
 function Todo() {
   const dispatch = useDispatch()
-  const tasks = useSelector(state => state.value)
+  const tasks = useSelector(state => state.todos)
 
   const [newTask, setNewTask] = useState("")
 
@@ -50,7 +50,7 @@ function Todo() {
         tasks.map((task) => (
           <li key={task.id}>
             <span>{task.description}</span>
-            <div class="button-container">
+            <div className="button-container">
               <button onClick={() => handleDelete(task.id)}>Delete</button>
               <button onClick={() => handleClone(task.id)}>Clone</button>
             </div>
