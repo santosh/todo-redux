@@ -8,41 +8,10 @@ import reportWebVitals from './reportWebVitals';
 
 console.log(store.getState())
 
-const unsubscribe = store.subscribe(() => {
-  console.log('State after dispatch', store.getState());
-})
+console.log("Dispatching action");
+store.dispatch({ type: 'todo/TODO_ADDED', payload: { id: 1, description: "Learn about actions", completed: false } })
+console.log("Dispatch complete");
 
-store.dispatch({
-  type: 'todo/TODO_ADDED',
-  // ID here is dummy and is generated later on
-  payload: { id: 1, description: "Learn about actions", completed: false }
-})
-store.dispatch({
-  type: 'todo/TODO_ADDED',
-  payload: { id: 1, description: "Learn about reducers", completed: false }
-})
-store.dispatch({
-  type: 'todo/TODO_ADDED',
-  payload: { id: 1, description: "Learn about stores", completed: false }
-})
-
-store.dispatch({ type: 'todo/TODO_TOGGLED', payload: 2 })
-store.dispatch({ type: 'todo/TODO_TOGGLED', payload: 2 })
-store.dispatch({ type: 'todo/TODO_TOGGLED', payload: 2 })
-
-store.dispatch({ type: 'filter/STATUS_FILTER_CHANGED', payload: 'Active' })
-
-store.dispatch({
-  type: 'filter/COLOR_FILTER_CHANGED',
-  payload: { color: 'red', changeType: 'added' }
-})
-
-// Stop listening to state updates
-unsubscribe()
-
-// Dispatch one more action to see what happens
-
-store.dispatch({ type: 'todo/TODO_ADDED', payload: 'Try creating a store' })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
