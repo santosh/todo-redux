@@ -1,8 +1,5 @@
 const initialState = [
-  { id: 1, description: "Write email", completed: false },
-  { id: 2, description: "Deep work", completed: false },
-  { id: 3, description: "Meeting", completed: false, color: 'purple' },
-  { id: 4, description: "Write design doc", completed: false, color: 'blue' },
+
 ]
 
 export function todoReducer(state = initialState, action) {
@@ -69,6 +66,6 @@ export function todoReducer(state = initialState, action) {
 }
 
 function nextTodoId(todos) {
-  const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId) - 1)
+  const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), 0)
   return maxId + 1
 }
