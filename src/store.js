@@ -1,8 +1,10 @@
-import { createStore } from "redux"
+import { createStore, applyMiddleware } from "redux"
 import { rootReducer } from "./reducer";
-import { sayHiOnDispatch } from "./exampleAddons/enhancers";
+import { print1, print2, print3 } from "./exampleAddons/middleware";
 
-const store = createStore(rootReducer, undefined, sayHiOnDispatch)
+const middlewareEnhancer = applyMiddleware(print1, print2, print3)
+
+const store = createStore(rootReducer, middlewareEnhancer)
 
 // ACTIONS
 
