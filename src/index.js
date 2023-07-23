@@ -6,13 +6,6 @@ import App from './App';
 import store from './store';
 import reportWebVitals from './reportWebVitals';
 
-console.log(store.getState())
-
-console.log("Dispatching action");
-store.dispatch({ type: 'todo/TODO_ADDED', payload: { id: 1, description: "Learn about actions", completed: false } })
-console.log("Dispatch complete");
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
