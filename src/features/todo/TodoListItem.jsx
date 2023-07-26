@@ -5,14 +5,14 @@ import { ReactComponent as TimesSolid } from './times-solid.svg'
 import { availableColors, capitalize } from '../filter/colors'
 
 
-const TodoListItem = ({ todo, onColorChange, onCompleteChange, onDelete }) => {
+const TodoListItem = ({ todo, onColorChange, onCompletedChange, onDelete }) => {
   const { text, completed, color } = todo
 
-  const handleCompleteChange = (e) => {
-    onCompleteChange(e.target.checked)
+  const handleCompletedChanged = (e) => {
+    onCompletedChange(e.target.checked)
   }
 
-  const handleColorChange = (e) => {
+  const handleColorChanged = (e) => {
     onColorChange(e.target.value)
   }
 
@@ -30,12 +30,12 @@ const TodoListItem = ({ todo, onColorChange, onCompleteChange, onDelete }) => {
             className="toggle"
             type="checkbox"
             checked={completed}
-            onChange={handleCompleteChange}
+            onChange={handleCompletedChanged}
           />
           <div className="todo-text">{text}</div>
         </div>
         <div className="segment buttons">
-          <select className="colorPicker" value={color} style={{ color }} onChange={handleColorChange}>
+          <select className="colorPicker" value={color} style={{ color }} onChange={handleColorChanged}>
             <option value=""></option>
             {colorOptions}
           </select>
