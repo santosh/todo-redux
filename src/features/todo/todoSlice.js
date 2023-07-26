@@ -5,13 +5,13 @@ const initialState = [
 export function todoReducer(state = initialState, action) {
   switch (action.type) {
     case "todo/TODO_ADDED": {
-      const newTodoToAdd = {
-        ...action.payload,
-        id: nextTodoId(state) // Assuming nextTodoId function exists and generates the next unique ID
-      };
       return [
         ...state,
-        newTodoToAdd
+        {
+          id: nextTodoId(state),
+          text: action.payload,
+          completed: false,
+        },
       ]
     }
     case "todo/TODO_TOGGLED": {
