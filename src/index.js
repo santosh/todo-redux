@@ -5,6 +5,10 @@ import { Provider } from 'react-redux';
 import App from './App';
 import store from './store';
 import reportWebVitals from './reportWebVitals';
+import { fetchTodos } from './features/todo/todoSlice';
+import './api/server'
+
+store.dispatch(fetchTodos());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

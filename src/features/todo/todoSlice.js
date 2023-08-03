@@ -1,6 +1,6 @@
-const initialState = [
+import { client } from '../../api/client'
 
-]
+const initialState = []
 
 export function todoReducer(state = initialState, action) {
   switch (action.type) {
@@ -60,6 +60,9 @@ export function todoReducer(state = initialState, action) {
     case 'todo/TODO_COMPLETED_CLEARED': {
       return state.filter((todo) => !todo.completed)
     }
+    case 'todo/TODO_LOADED': {
+      return action.payload
+    }
     default:
       return state
   }
@@ -68,4 +71,16 @@ export function todoReducer(state = initialState, action) {
 function nextTodoId(todos) {
   const maxId = todos.reduce((maxId, todo) => Math.max(todo.id, maxId), 0)
   return maxId + 1
+}
+
+// fetchTodos is a thunk function
+export const fetchTodos = () => async (dispatch, getState) => {
+  const response = await client.get('/fakeApi/todos')
+
+  const stateBefore = getState()
+  console.log('State before dispatch: ', stateBefore.todos.length)
+  dispatch({ type: 'todo/TODO_LOADED', payload: response.todos })
+
+  const stateAfter = getState()
+  console.log('State after dispatch: ', stateAfter.todos.length)
 }
